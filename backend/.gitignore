@@ -1,1 +1,7 @@
-node_modules
+# Ignore the node_modules directory at the root of the project
+/node_modules
+
+# Ignore package-lock.json file
+package-lock.json
+
+
