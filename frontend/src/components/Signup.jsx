@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import React from 'react'
 
-function Login(props) {
+function Signup() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     // const [emailError, setEmailError] = useState("")
@@ -10,7 +9,7 @@ function Login(props) {
     const onButtonClick = async () => {
         e.preventDefault()
         try {
-            await axios.post("http://localhost:9000/",{
+            await axios.post("http://localhost:9000/signup",{
                 email,password
             })
         } catch (e) {
@@ -20,7 +19,7 @@ function Login(props) {
 
     return (
         <div className='flex flex-col border border-blue-400'>
-            <h1>Login</h1>
+            <h1>Signup</h1>
 
             <form action="POST">
                 <input type="email"
@@ -39,9 +38,9 @@ function Login(props) {
             </form>
             <br />
             <p>OR</p>
-            <Link to='/signup'> Signup Page </Link>
+            <Link to='/'>Login Page</Link>
         </div>
     )
 }
 
-export default Login
+export default Signup
