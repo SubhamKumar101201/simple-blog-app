@@ -13,34 +13,60 @@ const port = process.env.PORT || 9000
 app.use(bodyParser.json())
 
 
- 
-app.get('/',(req,res) => {
-    connection.query('SELECT * FROM users', (err, results) => {
+
+app.post('/', (req, res) => {
+  const { email , password } = req.body;
+
+  try {
+    connection.query(
+      'SELECT * FROM users WHERE email = ? AND password = ?',
+      [email, password],
+      (err, results) => {
         if (err) {
           console.error('Error executing query:', err);
           res.status(500).send('Internal Server Error');
         } else {
-          res.json(results);
+          if (results.length > 0) {
+            res.json('exist');
+          } else {
+            res.json('notexist');
+          }
         }
-    })
+      }
+    );
+  } catch(e) {
+    res.json('failed')
+  } 
+});
+
+
+app.post("/signup", async (req, res) => {
+  const { name, email, password } = req.body;
+
+  try {
+    const checkEmail = await connection.query( `SELECT * FROM users WHERE email = ?`, [ email ] );
+
+    if (checkEmail.length > 0) {
+      res.json('Email already exists');
+    } else {
+      const insertUser = await connection.query(
+        `INSERT INTO users (name, email, password) VALUES (?, ?, ?)`,
+        [name, email, password], (err, results) => {
+          if (err) {
+            console.log(err)
+            res.json('failed to resgister')
+          } else {
+            console.log(results)
+            res.json('user resgistered successfully')
+          }
+        }
+      )
+    }
+  } catch (e) {
+    res.json('failed')
+  }
 })
 
-app.post('/users', (req, res) => {
-    const { name, email, password } = req.body;
-    if (!name || !email || !password) {
-      return res.status(400).json({ error: 'Missing required fields' });
-    }
-    const insertQuery = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)';
-    connection.query(insertQuery, [name, email, password], (err, result) => {
-      if (err) {
-        console.error('Error executing insert query:', err);
-        res.status(500).send('Internal Server Error');
-      } else {
-        res.status(201).send('User added successfully');
-      }
-    });
-  });
-
-app.listen( port , () => {
-    console.log(`Server is running on port ${port}`)
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`)
 })
