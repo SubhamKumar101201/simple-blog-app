@@ -9,8 +9,6 @@ function Signup() {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    // const [emailError, setEmailError] = useState("")
-    // const [passwordError, setPasswordError] = useState("")
 
     const onButtonClick = async (e) => {
         e.preventDefault()
@@ -20,6 +18,8 @@ function Signup() {
             }).then(res => {
                 if (res.data === 'exist') {
                     alert('user already exist')
+                } else if (res.data === 'missing' ) {
+                    alert('fields are missing')
                 } else if (res.data = 'resgistered') {
                     navigate('/home', { state: { id: email } })
                 }
