@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
+import { Button } from '@mui/material'
 
 function Signup() {
 
@@ -12,25 +13,26 @@ function Signup() {
 
     const onButtonClick = async (e) => {
         e.preventDefault()
-        try {
-            await axios.post("http://localhost:9000/signup", {
-                name, email, password
-            }).then(res => {
-                if (res.data === 'exist') {
-                    alert('user already exist')
-                } else if (res.data === 'missing' ) {
-                    alert('fields are missing')
-                } else if (res.data = 'resgistered') {
-                    navigate('/home', { state: { id: email } })
-                }
-            })
-                .catch(e => {
-                    alert('wrong details')
-                    console.log(e)
-                })
-        } catch (e) {
-            console.log(e)
-        }
+        
+        // try {
+        //     await axios.post("http://localhost:9000/signup", {
+        //         name, email, password
+        //     }).then(res => {
+        //         if (res.data === 'exist') {
+        //             alert('user already exist')
+        //         } else if (res.data === 'missing' ) {
+        //             alert('fields are missing')
+        //         } else if (res.data = 'resgistered') {
+        //             navigate('/home', { state: { id: email } })
+        //         }
+        //     })
+        //         .catch(e => {
+        //             alert('wrong details')
+        //             console.log(e)
+        //         })
+        // } catch (e) {
+        //     console.log(e)
+        // }
     }
 
     return (
@@ -57,17 +59,16 @@ function Signup() {
                         placeholder='Enter your password here'
                         className='border p-2'
                     />
-                    <button
-                        type="submit"
+                    <Button
+                        variant="contained"
                         onClick={onButtonClick}
-                        className='bg-blue-500 text-white p-2 rounded hover:bg-blue-600 cursor-pointer'
                     >
-                        Signup
-                    </button>
+                        Login
+                    </Button>
                 </form>
                 <br />
-                <p className='text-gray-600'>OR</p>
-                <Link to='/' className='text-blue-500 hover:underline'>
+                <p className='text-gray-600 flex flex-col items-center'>OR</p>
+                <Link to='/' className='text-blue-500 hover:underline flex flex-col items-center'>
                     Login
                 </Link>
             </div>

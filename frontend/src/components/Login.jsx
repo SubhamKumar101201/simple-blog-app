@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
+import { Button } from '@mui/material'
 
 
 function Login() {
@@ -48,17 +49,16 @@ function Login() {
                         placeholder='Enter your password here'
                         className='border p-2'
                     />
-                    <button
-                        type="submit"
+                    <Button
+                        variant="contained"
                         onClick={onButtonClick}
-                        className='bg-blue-500 text-white p-2 rounded hover:bg-blue-600 cursor-pointer'
                     >
                         Login
-                    </button>
+                    </Button>
                 </form>
                 <br />
-                <p className='text-gray-600'>OR</p>
-                <Link to='/signup' className='text-blue-500 hover:underline'>
+                <p className='text-gray-600 flex flex-col items-center'>OR</p>
+                <Link to='/signup' className='text-blue-500 hover:underline flex flex-col items-center'>
                     Signup
                 </Link>
             </div>
