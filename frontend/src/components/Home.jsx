@@ -6,7 +6,7 @@ function Home() {
 
   return (
     <div>
-        <h1> Hello {location.state.name} and welcome to the home!!</h1>
+        <h1> Hello {location.state.name} and welcome to the home!! with email {location.state.email}</h1>
     </div>
   )
 }

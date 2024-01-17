@@ -1,57 +1,86 @@
-import React, { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
-import axios from 'axios'
-import { Button } from '@mui/material'
-
+import React, { useState } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { API } from '../services/api';
 
 function Login() {
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    const navigate = useNavigate()
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState(location.state?.email || '');
+    const [password, setPassword] = useState(location.state?.password || '');
+    const [error, setError] = useState('');
+
+    const [showPassword, setShowPassword] = React.useState(false);
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
 
     const onButtonClick = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         try {
-            await axios.post("http://localhost:9000/", {
-                email, password
-            }).then(res => {
-                if (res.data.response === 'exist') {
-                    navigate('/home', { state: { id: email , name:res.data.data[0].name } })
-                } else if (res.data === 'notexist') {
-                    alert('user have not sign up')
-                }
-            })
-                .catch(e => {
-                    alert('wrong details')
-                    console.log(e)
-                })
-        } catch (e) {
-            console.log(e)
+            let response = await API.userLogin({ email, password });
+
+            if (response.isSuccess) {
+                navigate('/home', { state: { email: email, name: response.data.data[0].name } });
+            } else {
+                setError('Something went wrong!');
+            }
+        } catch (err) {
+            console.log(err);
+            alert('Internal server error while fetching data from API');
+            setError('Internal server error while fetching data from API');
         }
-    }
+    };
 
     return (
         <div className='flex flex-col items-center justify-center h-screen bg-gray-100'>
             <div className='bg-white p-8 rounded shadow-md'>
-                <h1 className='text-2xl mb-4'>Login</h1>
+                <h1 className='text-2xl mb-4 m-[8px]'>Login</h1>
 
-                <form action="POST" className='flex flex-col gap-3'>
-                    <input
-                        type="email"
-                        onChange={(e) => { setEmail(e.target.value) }}
+                <form action='POST' className='flex flex-col gap-3'>
+                    <TextField
+                        id='outlined-multiline-flexible'
+                        label='Email'
+                        onChange={(e) => {
+                            setEmail(e.target.value);
+                        }}
                         placeholder='Enter your email here'
-                        className='border p-2'
+                        value={email}
+                        sx={{ m: 1, width: '35ch' }}
                     />
-                    <input
-                        type="password"
-                        onChange={(e) => { setPassword(e.target.value) }}
-                        placeholder='Enter your password here'
-                        className='border p-2'
-                    />
+                    <FormControl sx={{ m: 1, width: '35ch' }} variant='outlined'>
+                        <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
+                        <OutlinedInput
+                            id='outlined-adornment-password'
+                            type={showPassword ? 'text' : 'password'}
+                            onChange={(e) => {
+                                setPassword(e.target.value);
+                            }}
+                            placeholder='Enter your password here'
+                            value={password}
+                            endAdornment={
+                                <InputAdornment position='end'>
+                                    <IconButton
+                                        aria-label='toggle password visibility'
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge='end'
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                            label='Password'
+                        />
+                    </FormControl>
                     <Button
-                        variant="contained"
+                        variant='contained'
                         onClick={onButtonClick}
+                        className='m-[8px]'
                     >
                         Login
                     </Button>
@@ -63,8 +92,7 @@ function Login() {
                 </Link>
             </div>
         </div>
-    )
+    );
 }
 
-export default Login
-
+export default Login;

@@ -10,7 +10,7 @@ const app = express()
 
 const port = process.env.PORT || 9000
 
-app.use(bodyParser.json())
+app.use(bodyParser.json({ extended: true }))
 
 app.use(cors());
 

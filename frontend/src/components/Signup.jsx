@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import axios from 'axios'
+import { API } from '../services/api'
 import { Button } from '@mui/material'
 
 function Signup() {
@@ -10,29 +10,25 @@ function Signup() {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [error, setError] = useState("")
 
     const onButtonClick = async (e) => {
         e.preventDefault()
-        
-        // try {
-        //     await axios.post("http://localhost:9000/signup", {
-        //         name, email, password
-        //     }).then(res => {
-        //         if (res.data === 'exist') {
-        //             alert('user already exist')
-        //         } else if (res.data === 'missing' ) {
-        //             alert('fields are missing')
-        //         } else if (res.data = 'resgistered') {
-        //             navigate('/home', { state: { id: email } })
-        //         }
-        //     })
-        //         .catch(e => {
-        //             alert('wrong details')
-        //             console.log(e)
-        //         })
-        // } catch (e) {
-        //     console.log(e)
-        // }
+        try {
+            let response = await API.userSignup({ name, email, password })
+
+            if (response.isSuccess) {
+                navigate('/', { state: { email, password } });
+            } else {
+                setError('Something went error!')
+            }
+        } catch (err) {
+            console.log(err)
+            alert('Internal server error while feching data form API')
+            setError('Internal server error while feching data form API')
+        }
+
+
     }
 
     return (

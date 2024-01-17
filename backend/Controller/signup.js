@@ -4,26 +4,31 @@ exports.signupCon = async (req, res) => {
     const { name, email, password } = req.body;
     if (name && email && password) {
         try {
-            const checkEmail = await connection.query(`SELECT * FROM users WHERE email = ?`, [email]);
-
-            if (checkEmail.length > 0) {
-                res.json('exists');
-            } else {
-                const insertUser = await connection.query(
-                    `INSERT INTO users (name, email, password) VALUES (?, ?, ?)`,
-                    [name, email, password], (err, results) => {
-                        if (err) {
-                            res.json('failed to resgister')
+            await connection.query('SELECT * FROM users WHERE email = ?', [email],
+                (err, results) => {
+                    if (err) {
+                        console.error('Error executing query:', err);
+                        return res.status(500).json({ msg: 'Internal Server Error' });
+                    } else {
+                        if (results.length > 0) {
+                            return res.status(409).json({ msg: 'Email already exist', data: results });
                         } else {
-                            res.json('resgistered')
+                            connection.query('INSERT INTO users (name , email , password) VALUES (?,?,?)', [name, email, password], (err, result) => {
+                                if (err) {
+                                    console.log(err);
+                                    return res.status(500).json({ msg: 'Error while singup the user' });
+                                } else if (result) {
+                                    return res.status(200).json({ msg: 'User singup successfully' });
+                                }
+                            })
                         }
                     }
-                )
-            }
-        } catch (e) {
-            res.json('failed')
+                })
+        } catch (err) {
+            console.log(err);
+            return res.status(500).json({ msg: 'Internal Server Error' });
         }
     } else {
-        res.json('missing')
+        return res.status(422).json({ msg: "Missing required field(s)" })
     }
 }
