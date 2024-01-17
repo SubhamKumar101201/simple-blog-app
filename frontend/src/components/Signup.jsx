@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { API } from '../services/api'
-import { Button } from '@mui/material'
+import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 
 function Signup() {
 
@@ -11,6 +12,13 @@ function Signup() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
+
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
 
     const onButtonClick = async (e) => {
         e.preventDefault()
@@ -34,36 +42,64 @@ function Signup() {
     return (
         <div className='flex flex-col items-center justify-center h-screen bg-gray-100'>
             <div className='bg-white p-8 rounded shadow-md'>
-                <h1 className='text-2xl mb-4'>Signup</h1>
+                <h1 className='text-2xl mb-4 m-[8px]'>Signup</h1>
 
                 <form action="POST" className='flex flex-col gap-3'>
-                    <input
-                        type="text"
-                        onChange={(e) => { setName(e.target.value) }}
+                    <TextField
+                        type='text'
+                        label='Name'
+                        onChange={(e) => {
+                            setName(e.target.value);
+                        }}
                         placeholder='Enter your name here'
-                        className='border p-2'
+                        value={name}
+                        sx={{ m: 1, width: '35ch' }}
                     />
-                    <input
-                        type="email"
-                        onChange={(e) => { setEmail(e.target.value) }}
+                    <TextField
+                        type='email'
+                        label='Email'
+                        onChange={(e) => {
+                            setEmail(e.target.value);
+                        }}
                         placeholder='Enter your email here'
-                        className='border p-2'
+                        value={email}
+                        sx={{ m: 1, width: '35ch' }}
                     />
-                    <input
-                        type="password"
-                        onChange={(e) => { setPassword(e.target.value) }}
-                        placeholder='Enter your password here'
-                        className='border p-2'
-                    />
+                    <FormControl sx={{ m: 1, width: '35ch' }} variant='outlined'>
+                        <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
+                        <OutlinedInput
+                            id='outlined-adornment-password'
+                            type={showPassword ? 'text' : 'password'}
+                            onChange={(e) => {
+                                setPassword(e.target.value);
+                            }}
+                            placeholder='Enter your password here'
+                            value={password}
+                            endAdornment={
+                                <InputAdornment position='end'>
+                                    <IconButton
+                                        aria-label='toggle password visibility'
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge='end'
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                            label='Password'
+                        />
+                    </FormControl>
                     <Button
                         variant="contained"
                         onClick={onButtonClick}
+                        className='!m-[8px]'
                     >
-                        Login
+                        Signup
                     </Button>
                 </form>
                 <br />
-                <p className='text-gray-600 flex flex-col items-center'>OR</p>
+                <p className='text-gray-600 flex flex-col items-center mb-1'>OR</p>
                 <Link to='/' className='text-blue-500 hover:underline flex flex-col items-center'>
                     Login
                 </Link>

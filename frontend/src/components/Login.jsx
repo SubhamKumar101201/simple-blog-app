@@ -12,7 +12,7 @@ function Login() {
     const [password, setPassword] = useState(location.state?.password || '');
     const [error, setError] = useState('');
 
-    const [showPassword, setShowPassword] = React.useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event) => {
@@ -43,7 +43,6 @@ function Login() {
 
                 <form action='POST' className='flex flex-col gap-3'>
                     <TextField
-                        id='outlined-multiline-flexible'
                         label='Email'
                         onChange={(e) => {
                             setEmail(e.target.value);
@@ -80,13 +79,13 @@ function Login() {
                     <Button
                         variant='contained'
                         onClick={onButtonClick}
-                        className='m-[8px]'
+                        className='!m-[8px]'
                     >
                         Login
                     </Button>
                 </form>
                 <br />
-                <p className='text-gray-600 flex flex-col items-center'>OR</p>
+                <p className='text-gray-600 flex flex-col items-center mb-1'>OR</p>
                 <Link to='/signup' className='text-blue-500 hover:underline flex flex-col items-center'>
                     Signup
                 </Link>
