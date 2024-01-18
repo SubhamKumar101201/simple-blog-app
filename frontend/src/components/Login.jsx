@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material';
+import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { API } from '../services/api';
 
@@ -23,16 +23,14 @@ function Login() {
         e.preventDefault();
         try {
             let response = await API.userLogin({ email, password });
-
+            
             if (response.isSuccess) {
                 navigate('/home', { state: { email: email, name: response.data.data[0].name } });
             } else {
                 setError('Something went wrong!');
             }
         } catch (err) {
-            console.log(err);
-            alert('Internal server error while fetching data from API');
-            setError('Internal server error while fetching data from API');
+            setError(err.data.data.msg);
         }
     };
 
@@ -76,6 +74,7 @@ function Login() {
                             label='Password'
                         />
                     </FormControl>
+                    {error && <Typography className='!m-[8px] !text-xs text-red-600 !leading-none font-semibold'> {error} </Typography>}
                     <Button
                         variant='contained'
                         onClick={onButtonClick}

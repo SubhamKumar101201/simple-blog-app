@@ -90,6 +90,7 @@ function Signup() {
                             label='Password'
                         />
                     </FormControl>
+                    {error && <Typography className='!m-[8px] !text-xs text-red-600 !leading-none font-semibold'> {error} </Typography>}
                     <Button
                         variant="contained"
                         onClick={onButtonClick}
