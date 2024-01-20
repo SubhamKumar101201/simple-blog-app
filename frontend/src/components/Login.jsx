@@ -21,17 +21,17 @@ function Login() {
 
     const onButtonClick = async (e) => {
         e.preventDefault();
-        try {
-            let response = await API.userLogin({ email, password });
-            
-            if (response.isSuccess) {
-                navigate('/home', { state: { email: email, name: response.data.data[0].name } });
-            } else {
-                setError('Something went wrong!');
+            try {
+                let response = await API.userLogin({ email, password });
+                
+                if (response.isSuccess) {
+                    navigate('/home', { state: { email: email, name: response.data.data[0].name } });
+                } else {
+                    setError('Something went wrong!');
+                }
+            } catch (err) {
+                setError(err.data.data.msg);
             }
-        } catch (err) {
-            setError(err.data.data.msg);
-        }
     };
 
     return (
@@ -41,6 +41,7 @@ function Login() {
 
                 <form action='POST' className='flex flex-col gap-3'>
                     <TextField
+                        type='email'
                         label='Email'
                         onChange={(e) => {
                             setEmail(e.target.value);

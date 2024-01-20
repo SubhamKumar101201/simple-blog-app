@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { API } from '../services/api'
-import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material'
+import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 
 function Signup() {
@@ -31,9 +31,7 @@ function Signup() {
                 setError('Something went error!')
             }
         } catch (err) {
-            console.log(err)
-            alert('Internal server error while feching data form API')
-            setError('Internal server error while feching data form API')
+            setError(err.data.data.msg);
         }
 
 
