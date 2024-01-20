@@ -1,5 +1,7 @@
 const connection = require('../DB/mysql_db');
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+require('dotenv').config();
 
 exports.loginCon = async (req, res) => {
     const { email, password } = req.body;
@@ -19,7 +21,9 @@ exports.loginCon = async (req, res) => {
 
                         if (!result) return res.status(401).json({ msg: 'Invalid Credentials' });
 
-                        return res.status(200).json({ msg: 'Authorized', data: results })
+                        const accessToken = jwt.sign( results[0], process.env.SECRET_KEY, { expiresIn: '15m' })
+                        const refreshToken = jwt.sign( results[0], process.env.SECRET_KEY)
+                        return res.status(200).json({ msg: 'Authorized', data: results[0] })
                     })
                 }
             );

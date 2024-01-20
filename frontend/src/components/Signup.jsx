@@ -38,70 +38,75 @@ function Signup() {
     }
 
     return (
-        <div className='flex flex-col items-center justify-center h-screen bg-gray-100'>
-            <div className='bg-white p-8 rounded shadow-md'>
-                <h1 className='text-2xl mb-4 m-[8px]'>Signup</h1>
+        <div className='flex flex-row bg-gradient-to-br from-blue-500 via-blue-800 to-cyan-500'>
+            <div className='flex flex-col items-center  justify-center  h-screen w-[50%]'>
+                <img src="../../resource/content-writer.png" alt="Logo" />
+            </div>
+            <div className='flex flex-col items-center  justify-center  h-screen w-[50%]'>
+                <div className='bg-white p-8 rounded shadow-md'>
+                    <h1 className='text-2xl mb-4 m-[8px]'>Signup</h1>
 
-                <form action="POST" className='flex flex-col gap-3'>
-                    <TextField
-                        type='text'
-                        label='Name'
-                        onChange={(e) => {
-                            setName(e.target.value);
-                        }}
-                        placeholder='Enter your name here'
-                        value={name}
-                        sx={{ m: 1, width: '35ch' }}
-                    />
-                    <TextField
-                        type='email'
-                        label='Email'
-                        onChange={(e) => {
-                            setEmail(e.target.value);
-                        }}
-                        placeholder='Enter your email here'
-                        value={email}
-                        sx={{ m: 1, width: '35ch' }}
-                    />
-                    <FormControl sx={{ m: 1, width: '35ch' }} variant='outlined'>
-                        <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
-                        <OutlinedInput
-                            id='outlined-adornment-password'
-                            type={showPassword ? 'text' : 'password'}
+                    <form action="POST" className='flex flex-col gap-3'>
+                        <TextField
+                            type='text'
+                            label='Name'
                             onChange={(e) => {
-                                setPassword(e.target.value);
+                                setName(e.target.value);
                             }}
-                            placeholder='Enter your password here'
-                            value={password}
-                            endAdornment={
-                                <InputAdornment position='end'>
-                                    <IconButton
-                                        aria-label='toggle password visibility'
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge='end'
-                                    >
-                                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            label='Password'
+                            placeholder='Enter your name here'
+                            value={name}
+                            sx={{ m: 1, width: '35ch' }}
                         />
-                    </FormControl>
-                    {error && <Typography className='!m-[8px] !text-xs text-red-600 !leading-none font-semibold'> {error} </Typography>}
-                    <Button
-                        variant="contained"
-                        onClick={onButtonClick}
-                        className='!m-[8px]'
-                    >
-                        Signup
-                    </Button>
-                </form>
-                <br />
-                <p className='text-gray-600 flex flex-col items-center mb-1'>OR</p>
-                <Link to='/' className='text-blue-500 hover:underline flex flex-col items-center'>
-                    Login
-                </Link>
+                        <TextField
+                            type='email'
+                            label='Email'
+                            onChange={(e) => {
+                                setEmail(e.target.value);
+                            }}
+                            placeholder='Enter your email here'
+                            value={email}
+                            sx={{ m: 1, width: '35ch' }}
+                        />
+                        <FormControl sx={{ m: 1, width: '35ch' }} variant='outlined'>
+                            <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
+                            <OutlinedInput
+                                id='outlined-adornment-password'
+                                type={showPassword ? 'text' : 'password'}
+                                onChange={(e) => {
+                                    setPassword(e.target.value);
+                                }}
+                                placeholder='Enter your password here'
+                                value={password}
+                                endAdornment={
+                                    <InputAdornment position='end'>
+                                        <IconButton
+                                            aria-label='toggle password visibility'
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                            edge='end'
+                                        >
+                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                label='Password'
+                            />
+                        </FormControl>
+                        {error && <Typography className='!m-[8px] !text-xs text-red-600 !leading-none font-semibold'> {error} </Typography>}
+                        <Button
+                            variant="contained"
+                            onClick={onButtonClick}
+                            className='!m-[8px]'
+                        >
+                            Signup
+                        </Button>
+                    </form>
+                    <br />
+                    <p className='text-gray-600 flex flex-col items-center mb-1'>OR</p>
+                    <Link to='/' className='text-blue-500 hover:underline flex flex-col items-center'>
+                        Login
+                    </Link>
+                </div>
             </div>
         </div>
     )
