@@ -1,12 +1,12 @@
-import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { DataContext } from '../context/DataProvider'
 
 function Home() {
-    const location = useLocation()
-
+    const { account } = useContext( DataContext )
   return (
     <div>
-        <h1> Hello {location.state.name} and welcome to the home!! with email {location.state.email}</h1>
+        <h1> Hello { account.userData.name } </h1>
     </div>
   )
 }
