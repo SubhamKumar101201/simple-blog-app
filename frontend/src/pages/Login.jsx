@@ -3,7 +3,6 @@ import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { API } from '../services/api';
-import { DataContext } from '../context/DataProvider';
 
 function Login() {
     const navigate = useNavigate();
@@ -13,7 +12,6 @@ function Login() {
     const [password, setPassword] = useState(location.state?.password || '');
     const [error, setError] = useState('');
 
-    const { setAccount } = useContext(DataContext);
 
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -34,9 +32,7 @@ function Login() {
 
                 sessionStorage.setItem('refreshToken', `Bearer ${response.data.tokensObject.refreshToken}`);
 
-                setAccount({ userData: response.data.data })
-
-                navigate('/home')
+                navigate('/home', { state: { email: email, name: response.data.data.name } });
                 
             } else {
                 setError('Something went wrong!');
