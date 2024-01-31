@@ -1,20 +1,28 @@
 import { useState, useEffect } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import { Home, Login } from './pages/share'
 import './App.css'
 import Signup from './pages/Signup'
 
+const PrivateRoute = ({ isUserAuthenticated,...props }) => {
+  return isUserAuthenticated ? <><Outlet/></> : <Navigate replace to = '/' />
+}
+
 function App() {
-  // const [loggedIn, setLoggedIn] = useState(false)
-  // const [email, setEmail] = useState("")
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false)
 
   return (
         <div>
           <BrowserRouter>
             <Routes>
-              <Route path='/' element={<Login />} />
+
+              <Route path='/' element={<Login setIsUserAuthenticated = { setIsUserAuthenticated } />} />
               <Route path='/signup' element={<Signup />} />
+
+              <Route path='/home' element={<PrivateRoute isUserAuthenticated={isUserAuthenticated}/>} >
               <Route path='/home' element={<Home />} />
+              </Route>
+
             </Routes>
           </BrowserRouter>
         </div>

@@ -1,15 +1,18 @@
 import React, { useContext } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
+import Banner from '../components/Banner'
 
 function Home() {
 
   const location = useLocation()
+  console.log("fuck",location)
 
   return (
     <div>
         <Navbar/>
-        <h1> Hello { location.state.name ? location.state.name : '??' } and welcome to the home!! with email { location.state.email ? location.state.email : "??" }</h1>
+        <Banner/>
+        <h1> Hello { location.state ? location.state.name : '??' } and welcome to the home!! with email { location.state ? location.state.email : "??" }</h1>
     </div>
   )
 }

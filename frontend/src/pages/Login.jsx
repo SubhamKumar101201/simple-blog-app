@@ -4,7 +4,7 @@ import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedIn
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { API } from '../services/api';
 
-function Login() {
+function Login({ setIsUserAuthenticated }) {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -31,6 +31,8 @@ function Login() {
                 sessionStorage.setItem('accessToken', `Bearer ${response.data.tokensObject.accessToken}`);
 
                 sessionStorage.setItem('refreshToken', `Bearer ${response.data.tokensObject.refreshToken}`);
+
+                setIsUserAuthenticated(true)
 
                 navigate('/home', { state: { email: email, name: response.data.data.name } });
                 
