@@ -1,32 +1,31 @@
-import React , { useState } from 'react';
-import { imagesBanner } from '../../resource/Banner';
+import React, { useState , useEffect } from 'react';
+import BannerImgs  from '../../resource/BannerImgs';
 
 function Banner() {
 
   const [activeImageIndex, setActiveImageIndex] = useState(0)
+  const imgUrls = BannerImgs();
 
   const handlePreviousClick = () => {
-    console.log(activeImageIndex);
     setActiveImageIndex(
-      !activeImageIndex ?  imagesBanner.length - 1 : activeImageIndex - 1
+      !activeImageIndex ? imgUrls.length - 1 : activeImageIndex - 1
     )
   }
 
   const handleNextClick = () => {
-    console.log(activeImageIndex);
-    setActiveImageIndex((activeImageIndex + 1) % imagesBanner.length)
+    setActiveImageIndex((activeImageIndex + 1) % imgUrls.length)
   }
-  
+
   return (
     <div className='flex justify-center'>
       <button className='absolute left-10 top-[35%]'
         onClick={handlePreviousClick}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-gray-100">
-          <path strokeLinecap="round" strokeLinejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-gray-200 hover:rounded-full hover:border-zinc-400 hover:border hover:bg-zinc-300 hover:text-gray-500">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
         </svg>
       </button>
-      {imagesBanner.map((item, index) => (
+      {imgUrls.map((item, index) => (
         <img
           src={item}
           alt="img"
@@ -37,8 +36,8 @@ function Banner() {
       <button className='absolute right-10 top-[35%]'
         onClick={handleNextClick}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-gray-100">
-          <path strokeLinecap="round" strokeLinejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-gray-200 hover:rounded-full hover:border-zinc-400 hover:border hover:bg-zinc-300 hover:text-gray-500">
+          <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
         </svg>
       </button>
     </div>
