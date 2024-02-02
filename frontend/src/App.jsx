@@ -19,9 +19,9 @@ function App() {
               <Route path='/' element={<Login setIsUserAuthenticated = { setIsUserAuthenticated } />} />
               <Route path='/signup' element={<Signup />} />
 
-              <Route path='/home' element={<PrivateRoute isUserAuthenticated={isUserAuthenticated}/>} >
+              {/* <Route path='/home' element={<PrivateRoute isUserAuthenticated={isUserAuthenticated}/>} > */}
               <Route path='/home' element={<Home />} />
-              </Route>
+              {/* </Route> */}
 
             </Routes>
           </BrowserRouter>

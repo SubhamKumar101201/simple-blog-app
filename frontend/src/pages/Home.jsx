@@ -6,8 +6,7 @@ import Banner from '../components/Banner'
 function Home() {
 
   const location = useLocation()
-  console.log("fuck",location)
-
+  
   return (
     <div>
         <Navbar/>
