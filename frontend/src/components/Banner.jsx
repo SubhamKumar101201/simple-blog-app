@@ -4,6 +4,7 @@ import BannerImgs  from '../../resource/BannerImgs';
 function Banner() {
 
   const [activeImageIndex, setActiveImageIndex] = useState(0)
+
   const imgUrls = BannerImgs();
 
   const handlePreviousClick = () => {
@@ -16,9 +17,18 @@ function Banner() {
     setActiveImageIndex((activeImageIndex + 1) % imgUrls.length)
   }
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      handleNextClick()
+    },5000)
+    return () => {
+      clearTimeout(timer)
+    }
+  })
+
   return (
     <div className='flex justify-center'>
-      <button className='absolute left-10 top-[35%]'
+      <button className='absolute left-10 top-[40%]'
         onClick={handlePreviousClick}
       >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-gray-200 hover:rounded-full hover:border-zinc-400 hover:border hover:bg-zinc-300 hover:text-gray-500">
@@ -30,10 +40,10 @@ function Banner() {
           src={item}
           alt="img"
           key={index}
-          className={`w-full h-[60vh] object-cover ${activeImageIndex === index ? "" : "hidden"}`}
+          className={`w-full h-[70vh] object-cover ${activeImageIndex === index ? "" : "hidden"}`}
         />
       ))}
-      <button className='absolute right-10 top-[35%]'
+      <button className='absolute right-10 top-[40%]'
         onClick={handleNextClick}
       >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-gray-200 hover:rounded-full hover:border-zinc-400 hover:border hover:bg-zinc-300 hover:text-gray-500">
