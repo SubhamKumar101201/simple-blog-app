@@ -11,7 +11,6 @@ function Home() {
     <div>
         <Navbar/>
         <Banner/>
-        <h1> Hello { location.state ? location.state.name : '??' } and welcome to the home!! with email { location.state ? location.state.email : "??" }</h1>
     </div>
   )
 }
