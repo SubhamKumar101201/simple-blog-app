@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom'
-import { Home, Login } from './pages/share'
+import { Home, Login, Post } from './pages/share'
 import './App.css'
 import Signup from './pages/Signup'
 
@@ -22,6 +22,8 @@ function App() {
               {/* <Route path='/home' element={<PrivateRoute isUserAuthenticated={isUserAuthenticated}/>} > */}
               <Route path='/home' element={<Home />} />
               {/* </Route> */}
+
+              <Route path='/create/post' element={<Post />} />              
 
             </Routes>
           </BrowserRouter>
