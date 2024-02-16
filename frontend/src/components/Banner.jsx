@@ -1,5 +1,5 @@
-import React, { useState , useEffect } from 'react';
-import BannerImgs  from '../../resource/BannerImgs';
+import React, { useState, useEffect } from 'react';
+import BannerImgs from '../../resource/BannerImgs';
 
 function Banner() {
 
@@ -20,7 +20,7 @@ function Banner() {
   useEffect(() => {
     const timer = setTimeout(() => {
       handleNextClick()
-    },5000)
+    }, 5000)
     return () => {
       clearTimeout(timer)
     }
@@ -35,14 +35,16 @@ function Banner() {
           <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
         </svg>
       </button>
-      {imgUrls.map((item, index) => (
-        <img
-          src={item}
-          alt="img"
-          key={index}
-          className={`w-full h-[70vh] object-cover ${activeImageIndex === index ? "" : "hidden"}`}
-        />
-      ))}
+      <div className='w-full h-[70vh]'>
+        {imgUrls.map((item, index) => (
+          <img
+            src={item}
+            alt="img"
+            key={index}
+            className={`w-full h-[70vh] object-cover ${activeImageIndex === index ? "" : "hidden"}`}
+          />
+        ))}
+      </div>
       <button className='absolute right-10 top-[40%]'
         onClick={handleNextClick}
       >
