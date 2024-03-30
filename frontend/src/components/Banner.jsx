@@ -27,8 +27,8 @@ function Banner() {
   })
 
   return (
-    <div className='flex justify-center'>
-      <button className='absolute left-10 top-[40%]'
+    <div className='flex justify-center mb-4'>
+      <button className='absolute left-10 top-[50%]'
         onClick={handlePreviousClick}
       >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-gray-200 hover:rounded-full hover:border-zinc-400 hover:border hover:bg-zinc-300 hover:text-gray-500">
@@ -45,7 +45,7 @@ function Banner() {
           />
         ))}
       </div>
-      <button className='absolute right-10 top-[40%]'
+      <button className='absolute right-10 top-[50%]'
         onClick={handleNextClick}
       >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-gray-200 hover:rounded-full hover:border-zinc-400 hover:border hover:bg-zinc-300 hover:text-gray-500">

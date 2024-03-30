@@ -6,3 +6,7 @@ exports.uploadCon = async (req, res) => {
     console.log(req);
     res.json({msg:file})
 }
+
+exports.check = async (req,res) => {
+    res.send({msg:req.hostname})
+}
