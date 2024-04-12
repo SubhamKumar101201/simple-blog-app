@@ -27,7 +27,7 @@ function Banner() {
   })
 
   return (
-    <div className='flex justify-center mb-4'>
+    <div className='flex justify-center mb-2'>
       <button className='absolute left-10 top-[50%]'
         onClick={handlePreviousClick}
       >

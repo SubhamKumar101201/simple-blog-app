@@ -1,12 +1,9 @@
 const connection = require('../DB/mysql_db')
 
-exports.uploadCon = async (req, res) => {
-    const file = req.file
-    console.log(req.file);
-    console.log(req);
-    res.json({msg:file})
+exports.createPost = async (req, res) => {
+    // if()
 }
 
-exports.check = async (req,res) => {
-    res.send({msg:req.hostname})
-}
+// exports.check = async (req,res) => {
+//     res.send({msg:req.hostname})
+// }
