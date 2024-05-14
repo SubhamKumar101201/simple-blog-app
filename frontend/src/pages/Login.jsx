@@ -27,10 +27,13 @@ function Login({ setIsUserAuthenticated }) {
 
             if (response.isSuccess) {
 
+                // console.log(response.data.data.id);
 
                 sessionStorage.setItem('accessToken', `Bearer ${response.data.tokensObject.accessToken}`);
 
                 sessionStorage.setItem('refreshToken', `Bearer ${response.data.tokensObject.refreshToken}`);
+
+                sessionStorage.setItem('userId', response.data.data.id);
 
                 setIsUserAuthenticated(true)
 

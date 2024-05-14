@@ -17,6 +17,7 @@ exports.loginCon = async (req, res) => {
                     if (!results.length > 0) return res.status(401).json({ msg: 'User not registered' });
 
                     bcrypt.compare(password, results[0].password, function (err, result) {
+                        
                         if (err) return res.status(500).json({ msg: 'Internal Server Error' });
 
                         if (!result) return res.status(401).json({ msg: 'Invalid Credentials' });
