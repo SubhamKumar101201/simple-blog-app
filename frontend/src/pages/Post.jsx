@@ -25,7 +25,7 @@ function Post() {
     try {
       const userId = sessionStorage.getItem('userId');
       if (userId === null) {
-        navigate('/login');
+        navigate('/');
       } else if (title === '' && description === '' && category === '') {
         setError('all')
       } else if (title === '' && description === '') {

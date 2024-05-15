@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar'
 import Banner from '../components/Banner'
 import Categories from '../components/Categories'
 import { Grid } from '@mui/material'
+import Posts from '../components/Posts'
 
 function Home() {
 
@@ -18,7 +19,7 @@ function Home() {
           <Categories />
         </Grid>
         <Grid item lg={10} sm={10} xs={12}>
-          Posts
+          <Posts/>
         </Grid>
       </Grid>
     </div>
