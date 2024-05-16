@@ -27,7 +27,7 @@ function Banner() {
   })
 
   return (
-    <div className='flex justify-center mb-2'>
+    <div className='flex justify-center mb-2 mx-2'>
       <button className='absolute left-10 top-[50%]'
         onClick={handlePreviousClick}
       >
@@ -41,7 +41,7 @@ function Banner() {
             src={item}
             alt="img"
             key={index}
-            className={`w-full h-[70vh] object-cover ${activeImageIndex === index ? "" : "hidden"}`}
+            className={`w-full h-[70vh] rounded-sm shadow-xl object-cover ${activeImageIndex === index ? "" : "hidden"}`}
           />
         ))}
       </div>
