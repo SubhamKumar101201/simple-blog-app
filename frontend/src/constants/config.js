@@ -27,5 +27,5 @@ export const SERVICE_URLS = {
     userSignup: { url: '/signup', method: 'POST' },
     userLogin: { url: '/', method: 'POST' },
     createPost: { url: '/create/post', method: 'POST'},
-    getPosts: { url: '/posts' , method: 'GET'}
+    getPosts: { url: '/posts' , method: 'POST'}
 } 
