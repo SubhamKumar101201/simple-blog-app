@@ -13,7 +13,7 @@ exports.getPosts = async (req, res) => {
                     }
                 }
             );
-        } else if (category === '') {
+        } else if (category === '' || category === undefined) {
             connection.query('SELECT * FROM posts', (err, result) => {
                 if (err) {
                     return res.status(404).json({ msg: err });

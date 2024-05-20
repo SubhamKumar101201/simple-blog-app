@@ -17,7 +17,7 @@ function Posts() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(category);
+        // console.log(category);
         const response = await API.getPosts({ category: category.toLowerCase() });
 
         if (response.isSuccess) {
