@@ -5,6 +5,7 @@ import { Button, FormControl, Input, InputBase, InputLabel, MenuItem, Select, Te
 import Fileupload from '../components/Fileupload';
 import { categories } from '../../public/category'
 import { API } from '../services/api';
+import Footer from '../components/Footer';
 
 function Post() {
   const navigate = useNavigate();
@@ -152,6 +153,7 @@ function Post() {
           > PUBLISH </button>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

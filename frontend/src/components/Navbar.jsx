@@ -11,7 +11,8 @@ function Navbar() {
             </Link>
             <ul className='flex mr-6'>
                 <Link to="/home" className='mr-4 cursor-pointer text-blue-500' >Home</Link>
-                <Link to="/contact" className='mr-4 cursor-pointer text-blue-500' >Contact</Link>
+                {/* <Link to="#footer" className='mr-4 cursor-pointer text-blue-500' >Contact</Link> */}
+                <li><a href="#footer" className="mr-4 cursor-pointer text-blue-500">Contact</a></li>
                 <Link to="/about" className='mr-4 cursor-pointer text-blue-500' >About</Link>
                 <Link to="/" className='mr-4 cursor-pointer text-blue-500' >Logout</Link>
             </ul>

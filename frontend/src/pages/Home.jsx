@@ -7,11 +7,12 @@ import { Grid } from '@mui/material'
 import Posts from '../components/Posts'
 import { API } from '../services/api'
 import PostContext from '../utility/PostContext'
+import Footer from '../components/Footer'
 
 function Home() {
 
   const location = useLocation()
-  const {setPosts} = useContext(PostContext)
+  const { setPosts } = useContext(PostContext)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -26,20 +27,21 @@ function Home() {
       }
     }
     fetchData();
-    }, []);
+  }, []);
 
   return (
     <div>
       <Navbar />
-      <Banner/>
+      <Banner />
       <Grid container>
         <Grid item lg={2} sm={2} xs={12}>
-          <Categories/>
+          <Categories />
         </Grid>
         <Grid item lg={10} sm={10} xs={12}>
-          <Posts/>
+          <Posts />
         </Grid>
       </Grid>
+      <Footer />
     </div>
   )
 }

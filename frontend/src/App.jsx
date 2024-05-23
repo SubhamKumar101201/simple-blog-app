@@ -4,6 +4,7 @@ import { Home, Login, Post } from './pages/share'
 import './App.css'
 import Signup from './pages/Signup'
 import MyPostContext from './utility/MyPostContext'
+import About from './pages/About'
 
 const PrivateRoute = ({ isUserAuthenticated, ...props }) => {
   return isUserAuthenticated ? <><Outlet /></> : <Navigate replace to='/' />
@@ -26,6 +27,7 @@ function App() {
             {/* </Route> */}
 
             <Route path='/create/post' element={<Post />} />
+            <Route path='/about' element={<About />} />
 
           </Routes>
         </BrowserRouter>
