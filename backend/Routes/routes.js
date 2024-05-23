@@ -8,7 +8,7 @@ const router = express.Router()
 router.post('/',loginCon)
 router.post('/signup',signupCon)
 router.post('/create/post',createPost)
-router.post('/posts',getPosts)
+router.get('/posts',getPosts)
 
 
 module.exports = router;

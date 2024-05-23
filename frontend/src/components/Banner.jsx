@@ -1,37 +1,18 @@
-import React, { useState, useEffect } from 'react';
-// import BannerImgs from '../../resource/BannerImgs';
-import { API } from '../services/api';
+import React, { useState, useEffect, useContext } from 'react';
+import PostContext from '../utility/PostContext';
 
 function Banner() {
-
   const [activeImageIndex, setActiveImageIndex] = useState(0)
-
-  const [imgUrls,setImgUrls] = useState([])
-
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const response = await API.getPosts({})
-        if(response.isSuccess) {
-          setImgUrls(response.data.msg)
-        } else {
-          console.log('Something went wrong!');
-        }
-      } catch (e) {
-        console.error('Error fetching data:',e)
-      }
-    }  
-    fetchPost();  
-  },[])
+  const { posts } = useContext(PostContext)
 
   const handlePreviousClick = () => {
     setActiveImageIndex(
-      !activeImageIndex ? imgUrls.length - 1 : activeImageIndex - 1
+      !activeImageIndex ? posts.length - 1 : activeImageIndex - 1
     )
   }
 
   const handleNextClick = () => {
-    setActiveImageIndex((activeImageIndex + 1) % imgUrls.length)
+    setActiveImageIndex((activeImageIndex + 1) % posts.length)
   }
 
   useEffect(() => {
@@ -53,7 +34,7 @@ function Banner() {
         </svg>
       </button>
       <div className='w-full h-[70vh] relative'>
-        {imgUrls.map((item, index) => (
+        {posts.map((item, index) => (
           <div key={index} className={`w-full h-full relative ${activeImageIndex === index ? "" : "hidden"}`}>
             <div className='absolute top-5 left-5 text-white text-xl bg-black bg-opacity-50 p-2 rounded'>
               {item.title}

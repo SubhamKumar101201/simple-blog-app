@@ -1,9 +1,11 @@
 import { Button, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
-import React from 'react'
+import React, { useContext } from 'react'
 import { categories } from '../../public/category'
 import { Link } from 'react-router-dom'
+import PostContext from '../utility/PostContext'
 
 function Categories() {
+    const { setCategory } = useContext(PostContext)
     return (
         <div>
             <Link to='/create/post' className='flex justify-center'>
@@ -15,7 +17,7 @@ function Categories() {
                 <TableHead>
                     <TableRow>
                         <TableCell>
-                            <Link to={'/home'}>
+                            <Link onClick={() => setCategory('all')}>
                                 <Button fullWidth>
                                     <div className='text-center font-roboto font-helvetica font-arial font-sans font-medium text-lg text-black'>
                                         All Categories
@@ -30,7 +32,7 @@ function Categories() {
                         categories.map(category => (
                             <TableRow key={category.id}>
                                 <TableCell>
-                                    <Link to={`/home?category=${category.type}`}>
+                                    <Link onClick={() => setCategory(category.type.toLowerCase())}>
                                         <Button fullWidth>
                                             {category.type}
                                         </Button>

@@ -3,31 +3,34 @@ import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom
 import { Home, Login, Post } from './pages/share'
 import './App.css'
 import Signup from './pages/Signup'
+import MyPostContext from './utility/MyPostContext'
 
-const PrivateRoute = ({ isUserAuthenticated,...props }) => {
-  return isUserAuthenticated ? <><Outlet/></> : <Navigate replace to = '/' />
+const PrivateRoute = ({ isUserAuthenticated, ...props }) => {
+  return isUserAuthenticated ? <><Outlet /></> : <Navigate replace to='/' />
 }
 
 function App() {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false)
 
   return (
-        <div>
-          <BrowserRouter>
-            <Routes>
+    <div>
+      <MyPostContext>
+        <BrowserRouter>
+          <Routes>
 
-              <Route path='/' element={<Login setIsUserAuthenticated = { setIsUserAuthenticated } />} />
-              <Route path='/signup' element={<Signup />} />
+            <Route path='/' element={<Login setIsUserAuthenticated={setIsUserAuthenticated} />} />
+            <Route path='/signup' element={<Signup />} />
 
-              {/* <Route path='/home' element={<PrivateRoute isUserAuthenticated={isUserAuthenticated}/>} > */}
-              <Route path='/home' element={<Home />} />
-              {/* </Route> */}
+            {/* <Route path='/home' element={<PrivateRoute isUserAuthenticated={isUserAuthenticated}/>} > */}
+            <Route path='/home' element={<Home />} />
+            {/* </Route> */}
 
-              <Route path='/create/post' element={<Post />} />              
+            <Route path='/create/post' element={<Post />} />
 
-            </Routes>
-          </BrowserRouter>
-        </div>
+          </Routes>
+        </BrowserRouter>
+      </MyPostContext>
+    </div>
   )
 }
 
