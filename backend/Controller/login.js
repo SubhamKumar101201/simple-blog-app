@@ -24,19 +24,9 @@ exports.loginCon = async (req, res) => {
 
                         const userPayload = { id: results[0].id, name: results[0].name, email: results[0].email, password: results[0].email };
 
-                        const accessToken = jwt.sign(userPayload, process.env.SECRET_KEY, { expiresIn: '15m' })
+                        const accessToken = jwt.sign(userPayload, process.env.SECRET_KEY)
 
-                        const refreshToken = jwt.sign(userPayload, process.env.SECRET_KEY)
-
-                        connection.query('INSERT INTO tokens (token) VALUES (?)', [refreshToken], (err, result) => {
-                            if (err) {
-                                console.log(err);
-                                return res.status(500).json({ msg: 'Error while singup the user' });
-                            }
-                        })
-
-
-                        return res.status(200).json({ msg: 'Authorized', data: results[0], tokensObject: { accessToken: accessToken, refreshToken: refreshToken } })
+                        return res.status(200).json({ msg: 'Authorized', data: results[0], tokensObject: { accessToken: accessToken } })
                     })
                 }
             );

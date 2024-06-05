@@ -6,6 +6,7 @@ import Fileupload from '../components/Fileupload';
 import { categories } from '../../public/category'
 import { API } from '../services/api';
 import Footer from '../components/Footer';
+import { jwtDecode } from 'jwt-decode'
 
 function Post() {
   const navigate = useNavigate();
@@ -24,7 +25,8 @@ function Post() {
   const onButtonClick = async (e) => {
     e.preventDefault();
     try {
-      const userId = sessionStorage.getItem('userId');
+      const decodeToken = jwtDecode(sessionStorage.getItem('accessToken'))
+      const userId = decodeToken.id
       if (userId === null) {
         navigate('/');
       } else if (title === '' && description === '' && category === '') {

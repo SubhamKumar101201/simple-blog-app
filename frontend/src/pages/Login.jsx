@@ -4,7 +4,7 @@ import { Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedIn
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { API } from '../services/api';
 
-function Login({ setIsUserAuthenticated }) {
+function Login() {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -29,18 +29,13 @@ function Login({ setIsUserAuthenticated }) {
 
                 sessionStorage.setItem('accessToken', `Bearer ${response.data.tokensObject.accessToken}`);
 
-                sessionStorage.setItem('refreshToken', `Bearer ${response.data.tokensObject.refreshToken}`);
-
-                sessionStorage.setItem('userId', response.data.data.id);
-
-                setIsUserAuthenticated(true)
-
                 navigate('/home', { state: { email: email, name: response.data.data.name } });
                 
             } else {
                 setError('Something went wrong!');
             }
         } catch (err) {
+            console.log(err)
             setError(err.data.data.msg);
         }
     };
