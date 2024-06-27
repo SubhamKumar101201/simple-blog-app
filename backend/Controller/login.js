@@ -1,4 +1,4 @@
-const connection = require('../DB/mysql_db');
+const connection = require('../DB/pgsql_db.js')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 require('dotenv').config();

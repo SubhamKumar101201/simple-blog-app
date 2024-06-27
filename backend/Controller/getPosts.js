@@ -1,4 +1,4 @@
-const connection = require('../DB/mysql_db')
+const connection = require('../DB/pgsql_db.js')
 
 exports.getPosts = async (req, res) => {
     try {
