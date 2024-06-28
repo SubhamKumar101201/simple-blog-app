@@ -21,7 +21,7 @@ const User = sequelize.define('User', {
         allowNull: false
     }
 }, {
-    timestamps: true, // This is true by default, can be omitted
+    timestamps: true,
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
 });

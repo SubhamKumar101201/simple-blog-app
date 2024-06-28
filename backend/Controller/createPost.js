@@ -2,8 +2,6 @@ const Post = require('../Model/post.model.js')
 
 exports.createPost = async (req, res) => {
     const { userId , category , imgUrl , title , description } = req.body;
-
-    console.log(userId , category , imgUrl , title , description)
     if ( userId && category && title && description ) {
         try {
             const post = await Post.create({
@@ -13,7 +11,6 @@ exports.createPost = async (req, res) => {
                 title,
                 description
             })
-            console.log(post);
             // connection.query('INSERT INTO posts ( user_id , category , image_url , title , description ) VALUES (?,?,?,?,?)', [userId, category.toLowerCase(), imgUrl, title, description], (err, result) => {
             //     if (err) {
             //         console.log(err);

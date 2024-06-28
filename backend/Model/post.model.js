@@ -18,8 +18,7 @@ const Post = sequelize.define('Post', {
     },
     category: {
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
+        allowNull: false
     },
     image_url: {
         type: DataTypes.STRING,
@@ -36,7 +35,14 @@ const Post = sequelize.define('Post', {
 }, {
     timestamps: true, // This is true by default, can be omitted
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    hooks: {
+        beforeValidate: (post, _) => {
+            if (post.category) {
+                post.category = post.category.toLowerCase();
+            }
+        }
+    }
 });
 
 User.hasMany(Post, { foreignKey: 'user_id' });

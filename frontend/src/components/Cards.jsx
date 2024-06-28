@@ -14,8 +14,14 @@ function Cards({ data }) {
       </div>
       <div className='w-2/3 p-4 overflow-hidden'>
         <h2 className='text-xl font-bold mb-2'>{data.title}</h2>
-        <p className='text-gray-600 mb-1'>Category: {data.category}</p>
-        <p className='text-gray-600 mb-1'>Date of Posting: {new Date(data.date).toLocaleDateString()}</p>
+        <p className='text-gray-600 mb-1'>Category: {data.category.charAt(0).toUpperCase() + data.category.slice(1)}</p>
+        <p className='text-gray-600 mb-1'>
+          Date of Posting: {new Date(data.createdAt).toLocaleDateString('en-GB', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
+          })}
+        </p>
         <div className={`h-[250px] overflow-y-auto ${showFullDescription ? 'overflow-y-scroll' : ''} custom-scroll`}>
           <p className='text-gray-600 mb-2'>
             {showFullDescription ? data.description : `${data.description.slice(0, 580)}...`}

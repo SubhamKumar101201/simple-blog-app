@@ -1,43 +1,24 @@
-const connection = require('../DB/pgsql_db.js')
-const bcrypt = require('bcrypt')
+const User = require('../Model/user.model.js');
+const bcrypt = require('bcrypt');
 
 exports.signupCon = async (req, res) => {
     const { name, email, password } = req.body;
     if (name && email && password) {
         try {
-            await connection.query('SELECT * FROM users WHERE email = ?', [email],
-                (err, results) => {
-                    if (err) {
-                        console.error('Error executing query:', err);
-                        return res.status(500).json({ msg: 'Internal Server Error' });
-                    } else {
-                        if (results.length > 0) {
-                            return res.status(409).json({ msg: 'Email already exist', data: results });
-                        } else {
-                            bcrypt.hash(password,10,(err,hashPassword) => {
-                                if (err) {
-                                    console.log(err);
-                                    return res.status(500).json({ msg: 'Internal Server Error' });
-                                } else {
-                                    connection.query('INSERT INTO users (name , email , password) VALUES (?,?,?)', [name, email, hashPassword], (err, result) => {
-                                        if (err) {
-                                            console.log(err);
-                                            return res.status(500).json({ msg: 'Error while singup the user' });
-                                        } else if (result) {
-                                            return res.status(200).json({ msg: 'User singup successfully' });
-                                        }
-                                    })
-                                }
-                            })
-                            
-                        }
-                    }
-                })
+            const existingUser = await User.findOne({ where: { email } });
+            if (existingUser) {
+                return res.status(409).json({ msg: 'Email already exists', data: existingUser });
+            }
+
+            const hashPassword = await bcrypt.hash(password, 10);
+            const newUser = await User.create({ name, email, password: hashPassword });
+
+            return res.status(200).json({ msg: 'User signed up successfully', data: newUser });
         } catch (err) {
-            console.log(err);
+            console.error('Error during signup:', err);
             return res.status(500).json({ msg: 'Internal Server Error' });
         }
     } else {
-        return res.status(422).json({ msg: "Missing required field(s)" })
+        return res.status(422).json({ msg: "Missing required field(s)" });
     }
-}
+};
