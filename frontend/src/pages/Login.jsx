@@ -44,7 +44,7 @@ function Login() {
         <>
             <div className='flex flex-row bg-gradient-to-br from-blue-500 via-blue-800 to-cyan-500'>
                 <div className='flex flex-col items-center  justify-center  h-screen w-[50%]'>
-                    <img src="../../resource/content-writer.png" alt="Logo" />
+                    <img src="/content-writer.png" alt="Logo" />
                 </div>
                 <div className='flex flex-col items-center  justify-center  h-screen w-[50%]'>
                     <div className='bg-white p-8 rounded shadow-md'>
